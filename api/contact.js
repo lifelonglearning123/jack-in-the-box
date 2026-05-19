@@ -61,42 +61,82 @@ export default async function handler(req, res) {
     companyName: companyName || undefined,
     source: "Jack in the Box Training — website",
     tags: [tag, interest ? `interest:${slug(interest)}` : null].filter(Boolean),
-    customFields: [
-      interest ? { key: "programme_interest", field_value: interest } : null,
-      message ? { key: "enquiry_message", field_value: message } : null,
-    ].filter(Boolean),
+  };
+
+  const ghlHeaders = {
+    "Authorization": `Bearer ${GHL_API_TOKEN}`,
+    "Version": apiVersion,
+    "Content-Type": "application/json",
+    "Accept": "application/json",
   };
 
   try {
     const ghlRes = await fetch("https://services.leadconnectorhq.com/contacts/", {
       method: "POST",
-      headers: {
-        "Authorization": `Bearer ${GHL_API_TOKEN}`,
-        "Version": apiVersion,
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
+      headers: ghlHeaders,
       body: JSON.stringify(payload),
     });
 
     const data = await ghlRes.json().catch(() => ({}));
 
+    let contactId = data?.contact?.id || null;
+    let duplicate = false;
+
     if (!ghlRes.ok) {
-      // 400 duplicate is acceptable — fall through as success but flag it
+      // 400 duplicate is acceptable — recover the existing contact id and continue
       const isDuplicate =
         ghlRes.status === 400 &&
         (data?.message || "").toLowerCase().includes("duplicate");
-      if (isDuplicate) {
-        return res.status(200).json({ ok: true, duplicate: true });
+      if (!isDuplicate) {
+        return res.status(502).json({
+          ok: false,
+          error: data?.message || `GHL responded ${ghlRes.status}.`,
+          details: data,
+        });
       }
-      return res.status(502).json({
-        ok: false,
-        error: data?.message || `GHL responded ${ghlRes.status}.`,
-        details: data,
-      });
+      duplicate = true;
+      contactId =
+        data?.meta?.contactId ||
+        data?.contactId ||
+        data?.contact?.id ||
+        null;
     }
 
-    return res.status(200).json({ ok: true, contactId: data?.contact?.id || null });
+    // Attach the enquiry as a Note on the contact (programme + message + meta).
+    let noteOk = true;
+    let noteError = null;
+    if (contactId && (interest || message || companyName || phone)) {
+      const noteBody = buildNoteBody({
+        firstName,
+        lastName,
+        email,
+        phone,
+        companyName,
+        interest,
+        message,
+      });
+      const noteRes = await fetch(
+        `https://services.leadconnectorhq.com/contacts/${encodeURIComponent(contactId)}/notes`,
+        {
+          method: "POST",
+          headers: ghlHeaders,
+          body: JSON.stringify({ body: noteBody }),
+        }
+      );
+      if (!noteRes.ok) {
+        noteOk = false;
+        const noteData = await noteRes.json().catch(() => ({}));
+        noteError = noteData?.message || `Note API responded ${noteRes.status}.`;
+      }
+    }
+
+    return res.status(200).json({
+      ok: true,
+      contactId,
+      duplicate,
+      noteOk,
+      ...(noteError ? { noteError } : {}),
+    });
   } catch (err) {
     return res.status(500).json({
       ok: false,
@@ -104,6 +144,26 @@ export default async function handler(req, res) {
       detail: err.message,
     });
   }
+}
+
+function buildNoteBody({ firstName, lastName, email, phone, companyName, interest, message }) {
+  const ts = new Date().toISOString().replace("T", " ").slice(0, 16) + " UTC";
+  const lines = [
+    "Website enquiry — Jack in the Box Training",
+    `Received: ${ts}`,
+    "",
+    `Name:      ${[firstName, lastName].filter(Boolean).join(" ") || "—"}`,
+    `Email:     ${email || "—"}`,
+    `Phone:     ${phone || "—"}`,
+    `Business:  ${companyName || "—"}`,
+    "",
+    "Programme of interest:",
+    interest ? `  ${interest}` : "  (not specified)",
+    "",
+    "About the business:",
+    message ? message.split(/\r?\n/).map((l) => `  ${l}`).join("\n") : "  (no message provided)",
+  ];
+  return lines.join("\n");
 }
 
 function clean(v) {
