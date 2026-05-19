@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Ian Cass — Founder · Jack in the Box Training Co</title>
+  <meta name="description" content="Meet Ian Cass — founder of Jack in the Box Training Co. Former Head of Ventures at Diageo, Managing Director of the Forum of Private Business, and Chairman of the Microbusiness Alliance." />
+
+  <link rel="icon" type="image/png" href="logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ----- founder page — local layout only ----- */
+    .founder-hero {
+      background: var(--cream);
+      padding: clamp(2rem, 5vw, 4.5rem) 0 var(--sec-y);
+      position: relative;
+      overflow: hidden;
+    }
+    .founder-hero::before {
+      content: "";
+      position: absolute;
+      top: 10%; right: -10%;
+      width: 55%;
+      aspect-ratio: 1;
+      background: repeating-conic-gradient(from 0deg, transparent 0 5deg, rgba(232,85,30,.06) 5deg 6deg);
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+      mask-image: radial-gradient(circle, black 0 35%, transparent 70%);
+    }
+    .founder-hero__grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: clamp(1.5rem, 5vw, 4.5rem);
+      align-items: center;
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 var(--pad-x) 0 calc(var(--ribbon-w) + var(--pad-x));
+      z-index: 2;
+    }
+    .founder-hero__name {
+      display: block;
+      color: var(--charcoal);
+    }
+    .founder-hero__name--mark {
+      color: var(--orange);
+      font-style: italic;
+    }
+    .founder-hero__role {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: .82rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      margin: 1.5rem 0 0;
+      padding: .65rem .85rem;
+      display: inline-block;
+      background: var(--cream-deep);
+      border-left: 4px solid var(--orange);
+    }
+    .founder-hero__sub {
+      font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+      line-height: 1.55;
+      max-width: 44ch;
+      margin: 1.6rem 0 0;
+      color: var(--ink);
+    }
+    .founder-hero__stamps {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(.5rem, 2vw, 1.5rem);
+      margin-top: 2.25rem;
+      padding-top: 1.75rem;
+      border-top: 1px dashed var(--charcoal);
+      max-width: 520px;
+    }
+    .founder-hero__stamps li {
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      font-family: var(--font-ui);
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--charcoal);
+    }
+
+    /* portrait card (no photo — bold typographic monogram + meta) */
+    .founder-card {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      justify-self: center;
+      background: var(--orange);
+      color: var(--cream);
+      border-radius: 2px;
+      padding: 2rem 1.85rem 1.75rem;
+      box-shadow: 14px 14px 0 2px var(--charcoal);
+      transform: rotate(-1.25deg);
+      isolation: isolate;
+    }
+    .founder-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(rgba(26,26,26,.18) 1.2px, transparent 1.6px) 0 0/14px 14px,
+        radial-gradient(rgba(255,255,255,.18) 1.2px, transparent 1.6px) 7px 7px/14px 14px;
+      opacity: .5;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .founder-card::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 2px dashed rgba(26,26,26,.4);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .founder-card > * { position: relative; z-index: 1; }
+    .founder-card__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: .72rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .founder-card__head span:first-child {
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: .3rem .55rem;
+    }
+    .founder-card__mono {
+      font-family: var(--font-display);
+      font-size: clamp(7rem, 16vw, 12rem);
+      line-height: .82;
+      letter-spacing: -.02em;
+      color: var(--cream);
+      text-shadow: 4px 4px 0 var(--charcoal);
+      margin: .5rem 0 1rem;
+    }
+    .founder-card__dl {
+      font-family: var(--font-ui);
+      display: grid;
+      gap: .5rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(244,239,230,.55);
+    }
+    .founder-card__dl > div {
+      display: grid;
+      grid-template-columns: 7rem 1fr;
+      gap: .5rem;
+      font-size: .85rem;
+    }
+    .founder-card__dl dt {
+      font-weight: 700;
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      align-self: center;
+    }
+    .founder-card__dl dd {
+      margin: 0;
+      font-weight: 600;
+    }
+    .founder-card__stamp {
+      position: absolute;
+      bottom: -22px;
+      right: -18px;
+      width: 110px;
+      height: 110px;
+      background: var(--charcoal);
+      color: var(--cream);
+      border-radius: 50%;
+      display: grid;
+      place-content: center;
+      text-align: center;
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: .65rem;
+      line-height: 1.25;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .5rem;
+      transform: rotate(10deg);
+      z-index: 2;
+      border: 3px solid var(--cream);
+      box-shadow: 0 0 0 3px var(--charcoal);
+    }
+    .founder-card__stamp strong {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--orange);
+      letter-spacing: .04em;
+      margin-bottom: .15rem;
+    }
+
+    @media (max-width: 860px) {
+      .founder-hero__grid { grid-template-columns: 1fr; }
+      .founder-card { margin-top: 2.5rem; transform: rotate(-.75deg); }
+    }
+
+    /* ----- the story (cream section) ----- */
+    .story {
+      background: var(--cream);
+      padding: var(--sec-y) 0;
+      position: relative;
+    }
+    .story__grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: clamp(1.5rem, 5vw, 4rem);
+      align-items: start;
+    }
+    .story__pull {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      line-height: .9;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      margin: 0;
+    }
+    .story__pull span { color: var(--orange); font-style: italic; }
+    .story__body p + p { margin-top: 1.1rem; }
+    .story__body p { font-size: clamp(1.05rem, 1.3vw, 1.18rem); line-height: 1.65; }
+    @media (max-width: 760px) { .story__grid { grid-template-columns: 1fr; } }
+
+    /* ----- timeline / career stops (orange section) ----- */
+    .career {
+      background: var(--orange);
+      color: var(--cream);
+      padding: calc(var(--sec-y) + var(--tooth-h)) 0 var(--sec-y);
+      position: relative;
+    }
+    .career__head { max-width: 880px; margin-bottom: clamp(2rem, 5vw, 4rem); }
+    .career__head .eyebrow { color: var(--cream); }
+    .career__head .eyebrow__tick { color: var(--charcoal); }
+    .career__title { color: var(--cream); }
+    .career__title em { color: var(--charcoal); font-style: italic; }
+    .career__lede {
+      font-size: clamp(1.1rem, 1.4vw, 1.25rem);
+      line-height: 1.55;
+      max-width: 56ch;
+      margin: 1.5rem 0 0;
+      color: var(--cream);
+    }
+
+    .stops {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media (max-width: 760px) { .stops { grid-template-columns: 1fr; } }
+
+    .stop {
+      position: relative;
+      background: var(--cream);
+      color: var(--charcoal);
+      padding: 2rem 1.85rem 1.85rem;
+      border-radius: 2px;
+      box-shadow: 8px 8px 0 0 var(--charcoal);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .stop:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 12px 12px 0 0 var(--charcoal);
+    }
+    .stop:nth-child(odd)  { transform: rotate(-.4deg); }
+    .stop:nth-child(even) { transform: rotate(.4deg); }
+    .stop:nth-child(odd):hover  { transform: translate(-2px, -2px) rotate(-.4deg); }
+    .stop:nth-child(even):hover { transform: translate(-2px, -2px) rotate(.4deg); }
+
+    .stop__no {
+      position: absolute;
+      top: -18px;
+      left: 1.85rem;
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: .5rem .8rem;
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: .72rem;
+      letter-spacing: .22em;
+    }
+    .stop__role {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: .72rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--orange-deep);
+      margin: .35rem 0 .25rem;
+    }
+    .stop__org {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+      line-height: .95;
+      text-transform: uppercase;
+      letter-spacing: -.005em;
+      margin: 0 0 .85rem;
+      color: var(--charcoal);
+    }
+    .stop__body {
+      font-size: 1.02rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .stop__tag {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      padding: .35rem .6rem;
+      background: var(--cream-deep);
+      color: var(--charcoal);
+    }
+
+    .career__closer {
+      margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      text-transform: uppercase;
+      line-height: 1.05;
+      color: var(--cream);
+      max-width: 22ch;
+    }
+    .career__closer em { color: var(--charcoal); font-style: italic; }
+
+    /* ----- shaping section (cream) ----- */
+    .shapes { background: var(--cream); padding: calc(var(--sec-y) + var(--tooth-h)) 0 var(--sec-y); position: relative; }
+    .shapes__head { max-width: 880px; margin-bottom: clamp(1.5rem, 4vw, 3rem); }
+    .shapes__grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
+    }
+    @media (max-width: 860px) { .shapes__grid { grid-template-columns: 1fr; } }
+    .shape {
+      border-top: 3px solid var(--charcoal);
+      padding-top: 1.25rem;
+    }
+    .shape__no {
+      font-family: var(--font-display);
+      color: var(--orange);
+      font-size: 2rem;
+      line-height: 1;
+      display: block;
+      margin-bottom: .5rem;
+    }
+    .shape h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      line-height: .95;
+      text-transform: uppercase;
+      margin: 0 0 .65rem;
+      color: var(--charcoal);
+    }
+    .shape p {
+      font-size: 1.02rem;
+      line-height: 1.6;
+      margin: 0;
+      color: var(--charcoal);
+    }
+
+    /* ----- CTA back to contact (charcoal) ----- */
+    .founder-cta {
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: calc(var(--sec-y) + var(--tooth-h)) 0 var(--sec-y);
+      position: relative;
+      text-align: center;
+    }
+    .founder-cta .container { max-width: 880px; }
+    .founder-cta .eyebrow { color: var(--cream); }
+    .founder-cta .eyebrow__tick { color: var(--orange); }
+    .founder-cta h2 {
+      color: var(--cream);
+      margin: 0 0 1.25rem;
+    }
+    .founder-cta h2 em { color: var(--orange); font-style: italic; }
+    .founder-cta p {
+      max-width: 56ch;
+      margin: 0 auto 2rem;
+      font-size: clamp(1.05rem, 1.3vw, 1.18rem);
+      line-height: 1.65;
+    }
+    .founder-cta .cta-row { justify-content: center; margin: 0; }
+    .founder-cta .btn--ghost { color: var(--cream); border-color: var(--cream); }
+    .founder-cta .btn--ghost:hover { background: var(--cream); color: var(--charcoal); }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================ -->
+  <!--  SITE NAV                                                    -->
+  <!-- ============================================================ -->
+  <header class="nav" role="banner">
+    <a href="index.html#top" class="nav__brand" aria-label="Jack in the Box Training — home">
+      <span class="nav__mark" aria-hidden="true">
+        <img src="logo.png" alt="" />
+      </span>
+      <span class="nav__wordmark">
+        <span class="nav__wordmark-line">Jack in the Box</span>
+        <span class="nav__wordmark-sub">Training&nbsp;Co.</span>
+      </span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <a href="index.html#programmes">Programmes</a>
+      <a href="index.html#about">About</a>
+      <a href="founder.html" aria-current="page">Founder</a>
+      <a href="index.html#ai">AI</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+
+    <a href="index.html#contact" class="nav__cta">Book a workshop <span aria-hidden="true">→</span></a>
+  </header>
+
+  <main id="top">
+
+    <!-- ============================================================ -->
+    <!--  FOUNDER HERO                                                -->
+    <!-- ============================================================ -->
+    <section class="founder-hero" aria-labelledby="founder-title">
+      <div class="ribbon ribbon--left ribbon--tall" aria-hidden="true">
+        <span>The Founder · Ian Cass · Diageo · Forum of Private Business · Microbusiness Alliance · Jack in the Box ·</span>
+      </div>
+
+      <div class="founder-hero__grid">
+        <div>
+          <p class="eyebrow eyebrow--dark">
+            <span class="eyebrow__tick" aria-hidden="true">►</span>
+            Meet the founder
+          </p>
+
+          <h1 id="founder-title" class="display display--hero">
+            <span class="founder-hero__name">Ian</span>
+            <span class="founder-hero__name founder-hero__name--mark">Cass.</span>
+          </h1>
+
+          <span class="founder-hero__role">Founder · Jack in the Box Training Co</span>
+
+          <p class="founder-hero__sub">
+            Three decades helping businesses think differently — from <strong>multinational ventures</strong>
+            to the UK's <strong>smallest firms</strong>. Now distilled into workshops built
+            ground-up for micro business.
+          </p>
+
+          <ul class="founder-hero__stamps" aria-label="At a glance">
+            <li><span class="stamp-num">04</span><span>Career stops, one through-line</span></li>
+            <li><span class="stamp-num">30+</span><span>Years championing small business</span></li>
+          </ul>
+        </div>
+
+        <aside class="founder-card" aria-label="Ian Cass — file card">
+          <div class="founder-card__head">
+            <span>File No. 001</span>
+            <span>EST. — KNUTSFORD</span>
+          </div>
+          <div class="founder-card__mono" aria-hidden="true">IC</div>
+          <dl class="founder-card__dl">
+            <div><dt>Name</dt><dd>Ian Cass</dd></div>
+            <div><dt>Role</dt><dd>Founder</dd></div>
+            <div><dt>Based</dt><dd>Knutsford, Cheshire</dd></div>
+            <div><dt>Focus</dt><dd>Micro business growth</dd></div>
+            <div><dt>Edge</dt><dd>Boardrooms to back-rooms</dd></div>
+          </dl>
+          <div class="founder-card__stamp" aria-hidden="true">
+            <strong>Pop!</strong>
+            Goes the<br/>weasel.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  Marquee strip                                               -->
+    <!-- ============================================================ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Diageo</span><span class="marquee__dot">✱</span>
+        <span>Forum of Private Business</span><span class="marquee__dot">✱</span>
+        <span>Microbusiness Alliance</span><span class="marquee__dot">✱</span>
+        <span>Jack in the Box Training Co</span><span class="marquee__dot">✱</span>
+        <span>Diageo</span><span class="marquee__dot">✱</span>
+        <span>Forum of Private Business</span><span class="marquee__dot">✱</span>
+        <span>Microbusiness Alliance</span><span class="marquee__dot">✱</span>
+        <span>Jack in the Box Training Co</span><span class="marquee__dot">✱</span>
+      </div>
+    </div>
+
+
+    <!-- ============================================================ -->
+    <!--  THE STORY                                                   -->
+    <!-- ============================================================ -->
+    <section class="story" aria-labelledby="story-title">
+      <div class="container">
+        <div class="story__grid">
+          <div>
+            <p class="eyebrow eyebrow--dark">► The story</p>
+            <h2 id="story-title" class="story__pull">
+              A career spent<br/>
+              between the <span>boardroom</span><br/>
+              and the back-room.
+            </h2>
+          </div>
+          <div class="story__body">
+            <p>
+              Ian's career is unusual in that he has worked at <strong>both ends</strong>
+              of the business world — leading ventures inside one of the world's largest drinks
+              companies, and championing the UK's <em>smallest</em> employers as a national voice.
+            </p>
+            <p>
+              That contrast is the foundation of Jack in the Box. The creative and innovation tools
+              that work in a global FTSE giant <em>can</em> work for a 1–9 person business — but only
+              if you strip them back, translate them, and rebuild them around how micro businesses
+              actually operate. That's what these workshops do.
+            </p>
+            <p>
+              Ian founded Jack in the Box Training Co to put thirty years of that thinking into a
+              practical, full-day format any micro business owner can use the very next morning.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  CAREER — four stops                                         -->
+    <!-- ============================================================ -->
+    <section class="career zig-cream-down" aria-labelledby="career-title">
+      <div class="container">
+        <header class="career__head">
+          <p class="eyebrow eyebrow--light">
+            <span class="eyebrow__tick" aria-hidden="true">►</span>
+            Career
+          </p>
+          <h2 id="career-title" class="display display--xl career__title">
+            Four stops.<br/>
+            One <em>through-line.</em>
+          </h2>
+          <p class="career__lede">
+            From multinational ventures to a national voice for the smallest firms — and now,
+            into the workshop room with you.
+          </p>
+        </header>
+
+        <ol class="stops" role="list">
+          <li class="stop">
+            <span class="stop__no">01</span>
+            <p class="stop__role">Head of Ventures</p>
+            <h3 class="stop__org">Diageo</h3>
+            <p class="stop__body">
+              Leading new-venture thinking inside one of the world's largest drinks companies —
+              the discipline of building something new <em>inside</em> a complex, established
+              organisation. Big-brand rigour, start-up appetite.
+            </p>
+            <span class="stop__tag">Innovation at scale</span>
+          </li>
+
+          <li class="stop">
+            <span class="stop__no">02</span>
+            <p class="stop__role">Managing Director</p>
+            <h3 class="stop__org">Forum of Private Business</h3>
+            <p class="stop__body">
+              Running the national membership body representing UK private businesses — turning
+              the lived reality of owner-led firms into a voice government and industry would
+              actually listen to.
+            </p>
+            <span class="stop__tag">National voice</span>
+          </li>
+
+          <li class="stop">
+            <span class="stop__no">03</span>
+            <p class="stop__role">Chairman</p>
+            <h3 class="stop__org">Microbusiness Alliance</h3>
+            <p class="stop__body">
+              Chairing the coalition focused specifically on the UK's <strong>1–9 employee</strong>
+              firms — the 75% of all UK businesses that mainstream training, policy and support
+              consistently overlook.
+            </p>
+            <span class="stop__tag">Champion of the 75%</span>
+          </li>
+
+          <li class="stop">
+            <span class="stop__no">04</span>
+            <p class="stop__role">Founder</p>
+            <h3 class="stop__org">Jack in the Box Training Co</h3>
+            <p class="stop__body">
+              Everything above, distilled. Full-day workshops and bespoke consultancy built
+              ground-up for micro business — so the creativity and innovation tools used by
+              the world's largest firms finally <em>transfer down</em>.
+            </p>
+            <span class="stop__tag">Pop! — present day</span>
+          </li>
+        </ol>
+
+        <p class="career__closer">
+          From boardroom to back-room — <em>and back again.</em>
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  WHAT SHAPES THE WORK                                        -->
+    <!-- ============================================================ -->
+    <section class="shapes zig-orange-down" aria-labelledby="shapes-title">
+      <div class="container">
+        <header class="shapes__head">
+          <p class="eyebrow eyebrow--dark">► What shapes the work</p>
+          <h2 id="shapes-title" class="display display--lg">
+            What this career<br/>
+            puts into <span class="ink-orange">every workshop.</span>
+          </h2>
+        </header>
+
+        <div class="shapes__grid">
+          <div class="shape">
+            <span class="shape__no">01</span>
+            <h3>Big-brand toolkit</h3>
+            <p>
+              Innovation frameworks, idea-generation techniques and venture thinking developed
+              and stress-tested inside a global FTSE-100 business.
+            </p>
+          </div>
+          <div class="shape">
+            <span class="shape__no">02</span>
+            <h3>Translated for 1–9</h3>
+            <p>
+              Stripped back, rebuilt and reshaped around how owner-led teams of 1–9 people
+              actually run their day — no specialist department required.
+            </p>
+          </div>
+          <div class="shape">
+            <span class="shape__no">03</span>
+            <h3>Voice of the small firm</h3>
+            <p>
+              Years spent representing private business and microbusiness at a national level —
+              the workshops are written from <em>inside</em> the world they serve.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!--  CTA — back to contact                                       -->
+    <!-- ============================================================ -->
+    <section class="founder-cta zig-cream-down" aria-labelledby="founder-cta-title">
+      <div class="container">
+        <p class="eyebrow eyebrow--light">
+          <span class="eyebrow__tick" aria-hidden="true">►</span>
+          Work with Ian
+        </p>
+        <h2 id="founder-cta-title" class="display display--xl">
+          Ready to think<br/>
+          <em>outside the box?</em>
+        </h2>
+        <p>
+          Workshops, bespoke consultancy and practical AI — delivered personally by Ian to
+          micro businesses across the UK. Drop your details and he'll be in touch.
+        </p>
+        <div class="cta-row">
+          <a href="index.html#contact" class="btn btn--primary">Get in touch <span aria-hidden="true">→</span></a>
+          <a href="index.html#programmes" class="btn btn--ghost">See the programmes</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
+    <!-- FOOTER                                                       -->
+    <!-- ============================================================ -->
+    <footer class="foot zig-orange-down">
+      <div class="container foot__grid">
+        <div class="foot__brand">
+          <img src="logo.png" alt="" class="foot__mark" />
+          <p class="foot__name">Jack in the Box<br/>Training Co.</p>
+        </div>
+        <div class="foot__col">
+          <p class="foot__label">Address</p>
+          <p>56 Bucklow Lane<br/>Knutsford, Cheshire<br/>WA16 0ED</p>
+        </div>
+        <div class="foot__col">
+          <p class="foot__label">Contact</p>
+          <p>
+            <a href="mailto:ijcass63@gmail.com">ijcass63@gmail.com</a><br/>
+            <a href="tel:+441565621035">01565 621035</a><br/>
+            Ian Cass
+          </p>
+        </div>
+        <div class="foot__col">
+          <p class="foot__label">Find us</p>
+          <p>
+            <a href="index.html#programmes">Programmes</a><br/>
+            <a href="index.html#about">About</a><br/>
+            <a href="founder.html">Founder</a><br/>
+            <a href="index.html#contact">Get in touch</a>
+          </p>
+        </div>
+        <div class="foot__bottom">
+          <p>© Jack in the Box Training Co.</p>
+          <p class="foot__pull">Unleash your creativity.</p>
+          <p>Knutsford · Cheshire · UK</p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

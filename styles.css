@@ -290,9 +290,9 @@ section > *, footer.foot > * { position: relative; z-index: 1; }
   box-shadow: 3px 3px 0 0 var(--orange);
 }
 .nav__mark img {
-  width: auto;
-  height: 94%;
-  max-width: 94%;
+  width: 90%;
+  height: 90%;
+  max-width: none;
   object-fit: contain;
   transform: rotate(-3deg);
 }
@@ -556,9 +556,9 @@ section > *, footer.foot > * { position: relative; z-index: 1; }
 .hero__jack {
   position: relative;
   z-index: 2;
-  width: auto;
+  width: 82%;
   height: 90%;
-  max-width: 82%;
+  object-fit: contain;
   filter: drop-shadow(2px 2px 0 rgba(244,239,230,.5));
   animation: jackBob 5.5s ease-in-out infinite;
   transform-origin: 50% 80%;
@@ -1183,6 +1183,82 @@ section > *, footer.foot > * { position: relative; z-index: 1; }
   padding-top: 1.5rem;
   margin-top: 1.5rem !important;
   line-height: 1.35 !important;
+}
+
+.ai__cta {
+  display: grid;
+  gap: .85rem;
+  margin-top: 2rem;
+  padding: 1.5rem 1.6rem 1.4rem;
+  background: var(--cream);
+  color: var(--charcoal);
+  border-radius: 2px;
+  box-shadow: 8px 8px 0 0 var(--orange);
+  transition: transform .25s, box-shadow .25s;
+  position: relative;
+  overflow: hidden;
+  max-width: 540px;
+}
+.ai__cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(rgba(26,26,26,.06) 1px, transparent 1.4px) 0 0/14px 14px;
+  pointer-events: none;
+  opacity: .6;
+}
+.ai__cta > * { position: relative; }
+.ai__cta:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 12px 12px 0 0 var(--orange);
+}
+.ai__cta:hover .ai__cta-arrow { transform: translateX(6px); }
+.ai__cta-tag {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: .68rem;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--orange-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+}
+.ai__cta-tag::before {
+  content: "►";
+  color: var(--orange);
+  font-size: .85em;
+}
+.ai__cta-line {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.2vw, 1.85rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -.005em;
+  color: var(--charcoal);
+}
+.ai__cta-line em {
+  color: var(--orange);
+  font-style: italic;
+}
+.ai__cta-link {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: .82rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding-top: .35rem;
+  border-top: 1px dashed rgba(26,26,26,.35);
+}
+.ai__cta-arrow {
+  display: inline-block;
+  transition: transform .25s cubic-bezier(.6,.05,.2,1);
+  color: var(--orange-deep);
 }
 
 .ai__chips {
