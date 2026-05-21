@@ -93,7 +93,7 @@
       color: var(--charcoal);
     }
 
-    /* portrait card (no photo — bold typographic monogram + meta) */
+    /* portrait card — cartoon-collage photo + meta */
     .founder-card {
       position: relative;
       width: 100%;
@@ -143,15 +143,37 @@
       color: var(--cream);
       padding: .3rem .55rem;
     }
-    .founder-card__mono {
-      font-family: var(--font-display);
-      font-size: clamp(7rem, 16vw, 12rem);
-      line-height: .82;
-      letter-spacing: -.02em;
-      color: var(--cream);
-      text-shadow: 4px 4px 0 var(--charcoal);
-      margin: .5rem 0 1rem;
+    .founder-card__photo {
+      position: relative;
+      background: var(--cream);
+      border: 2px solid var(--charcoal);
+      padding: .9rem .9rem .6rem;
+      margin: .25rem 0 1rem;
+      box-shadow: 6px 6px 0 0 var(--charcoal);
+      transform: rotate(.6deg);
     }
+    .founder-card__photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 340px;
+      object-fit: contain;
+      object-position: center;
+      mix-blend-mode: multiply;
+    }
+    .founder-card__photo-caption {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: .62rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-align: center;
+      margin: .55rem 0 0;
+      padding-top: .45rem;
+      border-top: 1px dashed rgba(26,26,26,.45);
+    }
+    .founder-card__photo-caption span { color: var(--orange-deep); }
     .founder-card__dl {
       font-family: var(--font-ui);
       display: grid;
@@ -176,40 +198,6 @@
       margin: 0;
       font-weight: 600;
     }
-    .founder-card__stamp {
-      position: absolute;
-      bottom: -22px;
-      right: -18px;
-      width: 110px;
-      height: 110px;
-      background: var(--charcoal);
-      color: var(--cream);
-      border-radius: 50%;
-      display: grid;
-      place-content: center;
-      text-align: center;
-      font-family: var(--font-ui);
-      font-weight: 700;
-      font-size: .65rem;
-      line-height: 1.25;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: .5rem;
-      transform: rotate(10deg);
-      z-index: 2;
-      border: 3px solid var(--cream);
-      box-shadow: 0 0 0 3px var(--charcoal);
-    }
-    .founder-card__stamp strong {
-      display: block;
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: 1.2rem;
-      color: var(--orange);
-      letter-spacing: .04em;
-      margin-bottom: .15rem;
-    }
-
     @media (max-width: 860px) {
       .founder-hero__grid { grid-template-columns: 1fr; }
       .founder-card { margin-top: 2.5rem; transform: rotate(-.75deg); }
@@ -239,6 +227,144 @@
     .story__body p + p { margin-top: 1.1rem; }
     .story__body p { font-size: clamp(1.05rem, 1.3vw, 1.18rem); line-height: 1.65; }
     @media (max-width: 760px) { .story__grid { grid-template-columns: 1fr; } }
+
+    /* ----- in-his-words pull-quote (inside story section) ----- */
+    .voice {
+      margin: clamp(3rem, 6vw, 5rem) auto 0;
+      max-width: 1080px;
+      position: relative;
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 4vw, 3.25rem)
+              clamp(2.25rem, 4vw, 3.5rem);
+      box-shadow: 12px 12px 0 0 var(--orange);
+      transform: rotate(-.35deg);
+      isolation: isolate;
+    }
+    .voice::before {
+      content: "“";
+      position: absolute;
+      top: -.35em;
+      left: clamp(.75rem, 2vw, 1.5rem);
+      font-family: var(--font-display);
+      font-size: clamp(7rem, 12vw, 10rem);
+      line-height: 1;
+      color: var(--orange);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .voice__eyebrow {
+      position: relative;
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: .72rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin: 0 0 1.25rem;
+      z-index: 1;
+    }
+    .voice__quote {
+      position: relative;
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(1.2rem, 2.1vw, 1.7rem);
+      line-height: 1.45;
+      color: var(--cream);
+      margin: 0;
+      z-index: 1;
+    }
+    .voice__quote strong { color: var(--orange-warm); font-weight: 600; }
+    .voice__attr {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .55rem 1rem;
+      margin-top: 1.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px dashed rgba(244,239,230,.35);
+      font-family: var(--font-ui);
+      font-size: .78rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--cream);
+      z-index: 1;
+    }
+    .voice__attr strong {
+      color: var(--orange);
+      font-weight: 700;
+      letter-spacing: .2em;
+    }
+    @media (max-width: 600px) {
+      .voice { transform: none; box-shadow: 8px 8px 0 0 var(--orange); }
+    }
+
+    /* ----- other ventures (charcoal band between Career and Shapes) ----- */
+    .ventures {
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: calc(var(--sec-y) + var(--tooth-h)) 0 var(--sec-y);
+      position: relative;
+    }
+    .ventures__head { max-width: 880px; margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+    .ventures__head .eyebrow { color: var(--cream); }
+    .ventures__head .eyebrow__tick { color: var(--orange); }
+    .ventures__title { color: var(--cream); margin: 0; }
+    .ventures__title em { color: var(--orange); font-style: italic; }
+    .ventures__lede {
+      font-size: clamp(1.05rem, 1.3vw, 1.18rem);
+      line-height: 1.6;
+      max-width: 56ch;
+      margin: 1.25rem 0 0;
+      color: var(--cream);
+    }
+    .ventures__grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(1rem, 3vw, 2rem);
+    }
+    @media (max-width: 860px) { .ventures__grid { grid-template-columns: 1fr; } }
+    .venture {
+      background: var(--cream);
+      color: var(--charcoal);
+      padding: 1.85rem 1.65rem 1.75rem;
+      border-radius: 2px;
+      box-shadow: 8px 8px 0 0 var(--orange);
+      position: relative;
+    }
+    .venture:nth-child(odd)  { transform: rotate(-.5deg); }
+    .venture:nth-child(even) { transform: rotate(.5deg); }
+    .venture__no {
+      font-family: var(--font-display);
+      color: var(--orange);
+      font-size: 1.8rem;
+      line-height: 1;
+      display: block;
+      margin-bottom: .35rem;
+    }
+    .venture__label {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--orange-deep);
+      margin: 0 0 .25rem;
+    }
+    .venture__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      line-height: .95;
+      text-transform: uppercase;
+      margin: 0 0 .75rem;
+      color: var(--charcoal);
+    }
+    .venture__body {
+      font-size: 1rem;
+      line-height: 1.55;
+      margin: 0;
+    }
 
     /* ----- timeline / career stops (orange section) ----- */
     .career {
@@ -442,7 +568,7 @@
     <!-- ============================================================ -->
     <section class="founder-hero" aria-labelledby="founder-title">
       <div class="ribbon ribbon--left ribbon--tall" aria-hidden="true">
-        <span>The Founder · Ian Cass · Diageo · Forum of Private Business · Microbusiness Alliance · Jack in the Box ·</span>
+        <span>The Founder · Ian Cass · Diageo Ventures · Forum of Private Business · Microbusiness Alliance · Hunters Gin · Jack in the Box ·</span>
       </div>
 
       <div class="founder-hero__grid">
@@ -460,14 +586,16 @@
           <span class="founder-hero__role">Founder · Jack in the Box Training Co</span>
 
           <p class="founder-hero__sub">
-            Three decades helping businesses think differently — from <strong>multinational ventures</strong>
-            to the UK's <strong>smallest firms</strong>. Now distilled into workshops built
-            ground-up for micro business.
+            Fourteen years at <strong>Diageo</strong> building the Venture team. A decade leading the
+            <strong>Forum of Private Business</strong>. Now Chairman of the <strong>Microbusiness
+            Alliance</strong> — and founder of Jack in the Box.
           </p>
 
           <ul class="founder-hero__stamps" aria-label="At a glance">
-            <li><span class="stamp-num">04</span><span>Career stops, one through-line</span></li>
-            <li><span class="stamp-num">30+</span><span>Years championing small business</span></li>
+            <li><span class="stamp-num">30k+</span><span>Private &amp; family firms represented (Forum)</span></li>
+            <li><span class="stamp-num">1.2m</span><span>Microbusinesses spoken for (MBA)</span></li>
+            <li><span class="stamp-num">14yr</span><span>At Diageo · formed the Venture team</span></li>
+            <li><span class="stamp-num">2015</span><span>MD of the Forum of Private Business</span></li>
           </ul>
         </div>
 
@@ -476,18 +604,19 @@
             <span>File No. 001</span>
             <span>EST. — KNUTSFORD</span>
           </div>
-          <div class="founder-card__mono" aria-hidden="true">IC</div>
+          <figure class="founder-card__photo">
+            <img src="ian.jpg" alt="Portrait of Ian Cass — head photo on a hand-illustrated cartoon body wearing a Bell's jacket" />
+            <figcaption class="founder-card__photo-caption">
+              Subject — <span>Ian Cass</span> · Field Sketch
+            </figcaption>
+          </figure>
           <dl class="founder-card__dl">
             <div><dt>Name</dt><dd>Ian Cass</dd></div>
-            <div><dt>Role</dt><dd>Founder</dd></div>
+            <div><dt>Role</dt><dd>MD · Chair · Founder</dd></div>
             <div><dt>Based</dt><dd>Knutsford, Cheshire</dd></div>
             <div><dt>Focus</dt><dd>Micro business growth</dd></div>
             <div><dt>Edge</dt><dd>Boardrooms to back-rooms</dd></div>
           </dl>
-          <div class="founder-card__stamp" aria-hidden="true">
-            <strong>Pop!</strong>
-            Goes the<br/>weasel.
-          </div>
         </aside>
       </div>
     </section>
@@ -498,13 +627,15 @@
     <!-- ============================================================ -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
-        <span>Diageo</span><span class="marquee__dot">✱</span>
-        <span>Forum of Private Business</span><span class="marquee__dot">✱</span>
-        <span>Microbusiness Alliance</span><span class="marquee__dot">✱</span>
+        <span>Diageo · 14 yrs</span><span class="marquee__dot">✱</span>
+        <span>Forum of Private Business · MD</span><span class="marquee__dot">✱</span>
+        <span>Microbusiness Alliance · Chair</span><span class="marquee__dot">✱</span>
+        <span>Hunters Gin · Founder</span><span class="marquee__dot">✱</span>
         <span>Jack in the Box Training Co</span><span class="marquee__dot">✱</span>
-        <span>Diageo</span><span class="marquee__dot">✱</span>
-        <span>Forum of Private Business</span><span class="marquee__dot">✱</span>
-        <span>Microbusiness Alliance</span><span class="marquee__dot">✱</span>
+        <span>Diageo · 14 yrs</span><span class="marquee__dot">✱</span>
+        <span>Forum of Private Business · MD</span><span class="marquee__dot">✱</span>
+        <span>Microbusiness Alliance · Chair</span><span class="marquee__dot">✱</span>
+        <span>Hunters Gin · Founder</span><span class="marquee__dot">✱</span>
         <span>Jack in the Box Training Co</span><span class="marquee__dot">✱</span>
       </div>
     </div>
@@ -527,21 +658,47 @@
           <div class="story__body">
             <p>
               Ian's career is unusual in that he has worked at <strong>both ends</strong>
-              of the business world — leading ventures inside one of the world's largest drinks
-              companies, and championing the UK's <em>smallest</em> employers as a national voice.
+              of the business world. Fourteen years at <strong>Diageo</strong>, where he formed
+              the Venture team. A decade at the helm of the <strong>Forum of Private Business</strong>,
+              the national membership body representing over 30,000 private and family firms.
+              And, since 2021, Chairman of the <strong>Microbusiness Alliance</strong> — the
+              voice of more than 1.2 million UK micro businesses.
             </p>
             <p>
-              That contrast is the foundation of Jack in the Box. The creative and innovation tools
-              that work in a global FTSE giant <em>can</em> work for a 1–9 person business — but only
-              if you strip them back, translate them, and rebuild them around how micro businesses
-              actually operate. That's what these workshops do.
+              Along the way he's also built things himself: he <em>owned a couple of pubs</em>,
+              <em>founded Hunters Gin</em>, and continues to back small companies as a business
+              angel and investor. So he doesn't just talk about the 1–9 person business — he's
+              run them, owned them, funded them and represented them.
             </p>
             <p>
-              Ian founded Jack in the Box Training Co to put thirty years of that thinking into a
-              practical, full-day format any micro business owner can use the very next morning.
+              That mix is the foundation of Jack in the Box. The creative and innovation tools
+              that work in a global FTSE giant <em>can</em> work for a 1–9 person business — but
+              only if you strip them back, translate them, and rebuild them around how micro
+              businesses actually operate. Ian founded Jack in the Box Training Co to put three
+              decades of that thinking into a practical, full-day format any micro business owner
+              can use the very next morning.
             </p>
           </div>
         </div>
+
+        <!-- in his own words -->
+        <figure class="voice" aria-label="Ian Cass — in his own words">
+          <p class="voice__eyebrow">► In Ian's words</p>
+          <blockquote class="voice__quote">
+            I am passionate about providing this support, advice and protection to
+            <strong>small and micro businesses</strong>, enabling them to do what they do best —
+            growing and developing their business. They are <strong>not 'big business only
+            smaller'</strong>, and they need a different approach and tailored support. Private
+            and family businesses are the <strong>backbone of the UK economy</strong>, and there
+            are lots of entrepreneurs in the sector who want to be innovative and want to grow;
+            they just need the support to do so.
+          </blockquote>
+          <figcaption class="voice__attr">
+            <strong>Ian Cass</strong>
+            <span>Managing Director · Forum of Private Business</span>
+            <span>Chairman · Microbusiness Alliance</span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
@@ -569,43 +726,46 @@
         <ol class="stops" role="list">
           <li class="stop">
             <span class="stop__no">01</span>
-            <p class="stop__role">Head of Ventures</p>
+            <p class="stop__role">14 years · Formed the Venture team</p>
             <h3 class="stop__org">Diageo</h3>
             <p class="stop__body">
-              Leading new-venture thinking inside one of the world's largest drinks companies —
-              the discipline of building something new <em>inside</em> a complex, established
-              organisation. Big-brand rigour, start-up appetite.
+              Fourteen years inside one of the world's largest drinks companies, where Ian went
+              on to <strong>form the Venture team</strong> — the discipline of building something
+              new <em>inside</em> a complex, established organisation. Big-brand rigour, start-up
+              appetite.
             </p>
             <span class="stop__tag">Innovation at scale</span>
           </li>
 
           <li class="stop">
             <span class="stop__no">02</span>
-            <p class="stop__role">Managing Director</p>
+            <p class="stop__role">Joined 2013 · MD since 2015</p>
             <h3 class="stop__org">Forum of Private Business</h3>
             <p class="stop__body">
-              Running the national membership body representing UK private businesses — turning
-              the lived reality of owner-led firms into a voice government and industry would
-              actually listen to.
+              Ian joined the Forum in 2013 and took the reins as Managing Director in summer
+              2015. Founded in <strong>1977</strong>, the Forum now represents over
+              <strong>30,000 private &amp; family firms</strong> — turning the lived reality of
+              owner-led businesses into a voice government and industry actually listen to.
             </p>
-            <span class="stop__tag">National voice</span>
+            <span class="stop__tag">National voice · 30k+ firms</span>
           </li>
 
           <li class="stop">
             <span class="stop__no">03</span>
-            <p class="stop__role">Chairman</p>
+            <p class="stop__role">Chairman &amp; spokesperson since 2021</p>
             <h3 class="stop__org">Microbusiness Alliance</h3>
             <p class="stop__body">
-              Chairing the coalition focused specifically on the UK's <strong>1–9 employee</strong>
-              firms — the 75% of all UK businesses that mainstream training, policy and support
-              consistently overlook.
+              Formed during the pandemic — when the voice of micro businesses simply wasn't being
+              heard, and the wrong support (or no support) was being offered as a result. Ian
+              became Chairman in 2021. The MBA now speaks for over <strong>1.2 million UK
+              microbusinesses</strong>.
             </p>
-            <span class="stop__tag">Champion of the 75%</span>
+            <span class="stop__tag">1.2m microbusinesses</span>
           </li>
 
           <li class="stop">
             <span class="stop__no">04</span>
-            <p class="stop__role">Founder</p>
+            <p class="stop__role">Founder · Present day</p>
             <h3 class="stop__org">Jack in the Box Training Co</h3>
             <p class="stop__body">
               Everything above, distilled. Full-day workshops and bespoke consultancy built
@@ -624,9 +784,63 @@
 
 
     <!-- ============================================================ -->
+    <!--  OTHER VENTURES — built, owned, backed                       -->
+    <!-- ============================================================ -->
+    <section class="ventures zig-orange-down" aria-labelledby="ventures-title">
+      <div class="container">
+        <header class="ventures__head">
+          <p class="eyebrow eyebrow--light">
+            <span class="eyebrow__tick" aria-hidden="true">►</span>
+            Beyond the day-jobs
+          </p>
+          <h2 id="ventures-title" class="display display--xl ventures__title">
+            Built, owned <em>&amp; backed.</em>
+          </h2>
+          <p class="ventures__lede">
+            Alongside the big roles, Ian has spent years on the <em>operator</em> side of
+            small business — running them, founding them, and putting his own money behind them.
+          </p>
+        </header>
+
+        <div class="ventures__grid">
+          <article class="venture">
+            <span class="venture__no">01</span>
+            <p class="venture__label">Spirits · Founder</p>
+            <h3 class="venture__title">Hunters Gin</h3>
+            <p class="venture__body">
+              Founded his own craft gin brand — taking a product from idea to bottle to bar,
+              with all the messy reality of building a consumer business from scratch.
+            </p>
+          </article>
+
+          <article class="venture">
+            <span class="venture__no">02</span>
+            <p class="venture__label">Hospitality · Owner</p>
+            <h3 class="venture__title">A couple of pubs</h3>
+            <p class="venture__body">
+              Owned and operated pubs in his own right — the front-line of running a small,
+              owner-led business where every shift, supplier and customer is personal.
+            </p>
+          </article>
+
+          <article class="venture">
+            <span class="venture__no">03</span>
+            <p class="venture__label">Angel · Investor</p>
+            <h3 class="venture__title">Backing small firms</h3>
+            <p class="venture__body">
+              Long-running business angel and investor across a variety of small companies —
+              spotting, funding and mentoring the kind of micro businesses he champions.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================ -->
     <!--  WHAT SHAPES THE WORK                                        -->
     <!-- ============================================================ -->
-    <section class="shapes zig-orange-down" aria-labelledby="shapes-title">
+    <section class="shapes zig-charcoal-down" aria-labelledby="shapes-title">
       <div class="container">
         <header class="shapes__head">
           <p class="eyebrow eyebrow--dark">► What shapes the work</p>
@@ -702,7 +916,7 @@
         </div>
         <div class="foot__col">
           <p class="foot__label">Address</p>
-          <p>56 Bucklow Lane<br/>Knutsford, Cheshire<br/>WA16 0ED</p>
+          <p>56 Blackhill Lane<br/>Knutsford, Cheshire<br/>WA16 0ED</p>
         </div>
         <div class="foot__col">
           <p class="foot__label">Contact</p>

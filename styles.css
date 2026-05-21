@@ -124,7 +124,7 @@ em { font-style: italic; font-weight: 500; }
   hyphens: manual;
   word-spacing: -.04em;
 }
-.display--hero  { font-size: clamp(3.6rem, 12.5vw, 12.5rem); }
+.display--hero  { font-size: clamp(3.6rem, 9.5vw, 8.5rem); }
 .display--mega  { font-size: clamp(3.4rem, 11vw, 11rem); }
 .display--xl    { font-size: clamp(2.6rem, 7.5vw, 7.5rem); }
 .display--lg    { font-size: clamp(2.2rem, 5vw, 4.6rem); }
@@ -569,43 +569,6 @@ section > *, footer.foot > * { position: relative; z-index: 1; }
   60%      { transform: translateY(6px) rotate(1.5deg); }
 }
 
-.hero__art-badge {
-  position: absolute;
-  top: -28px;
-  right: -22px;
-  width: 138px;
-  height: 138px;
-  background: var(--charcoal);
-  color: var(--cream);
-  border-radius: 50%;
-  display: grid;
-  place-content: center;
-  text-align: center;
-  font-family: var(--font-ui);
-  font-weight: 700;
-  font-size: .75rem;
-  line-height: 1.25;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  padding: .5rem;
-  transform: rotate(12deg);
-  z-index: 3;
-  border: 3px solid var(--cream);
-  box-shadow: 0 0 0 3px var(--charcoal);
-  animation: badgeSpin 28s linear infinite;
-}
-.hero__art-badge-line-1 {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.9rem;
-  color: var(--orange);
-  letter-spacing: 0;
-}
-@keyframes badgeSpin {
-  from { transform: rotate(12deg); }
-  to   { transform: rotate(372deg); }
-}
-
 .hero__art-tag {
   position: absolute;
   bottom: -18px;
@@ -615,26 +578,37 @@ section > *, footer.foot > * { position: relative; z-index: 1; }
   color: var(--charcoal);
   padding: .55rem 1.1rem;
   font-family: var(--font-ui);
-  font-size: .68rem;
+  font-size: .72rem;
   font-weight: 700;
-  letter-spacing: .3em;
+  letter-spacing: .22em;
   text-transform: uppercase;
   border: 2px solid var(--charcoal);
+  white-space: nowrap;
   z-index: 3;
 }
 
 @media (max-width: 860px) {
   .hero__grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     padding-left: calc(var(--ribbon-w) + var(--pad-x));
     padding-right: var(--pad-x);
   }
+  /* unwrap .hero__copy so its children become direct flex items of .hero__grid;
+     then order them so the jack-in-the-box logo sits between the sub paragraph
+     and the CTA buttons */
+  .hero__copy { display: contents; }
+  .hero__copy > .eyebrow      { order: 1; }
+  .hero__copy > .display      { order: 2; }
+  .hero__copy > .hero__sub    { order: 3; }
+  .hero__art                  { order: 4; }
+  .hero__copy > .cta-row      { order: 5; }
+  .hero__copy > .hero__stamps { order: 6; }
   .hero__art-frame {
     max-width: 380px;
     margin: 1.5rem auto 0;
   }
-  .hero__art-badge { width: 100px; height: 100px; font-size: .65rem; top: -18px; right: -8px; }
-  .hero__art-badge-line-1 { font-size: 1.35rem; }
 }
 @media (max-width: 480px) {
   .hero__stamps { grid-template-columns: 1fr 1fr; }
@@ -717,6 +691,7 @@ section > *, footer.foot > * { position: relative; z-index: 1; }
   text-shadow:
     6px 6px 0 var(--cream),
     12px 12px 0 var(--orange-deep);
+  padding-bottom: .18em;
 }
 .big-stat__suffix {
   font-family: var(--font-display);
@@ -759,6 +734,7 @@ section > *, footer.foot > * { position: relative; z-index: 1; }
   border-bottom: 1px dashed rgba(244,239,230,.45);
 }
 .challenge__list li:last-child { border-bottom: 0; }
+.challenge__list strong { color: var(--charcoal); font-weight: 700; }
 .bullet-num {
   font-family: var(--font-display);
   font-size: 2.1rem;
