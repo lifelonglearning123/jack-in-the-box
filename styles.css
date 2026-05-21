@@ -596,13 +596,13 @@ section > *, footer.foot > * { position: relative; z-index: 1; }
     padding-right: var(--pad-x);
   }
   /* unwrap .hero__copy so its children become direct flex items of .hero__grid;
-     then order them so the jack-in-the-box logo sits between the sub paragraph
-     and the CTA buttons */
+     then order them so the jack-in-the-box logo sits directly below the
+     "Unleash your Creativity" headline */
   .hero__copy { display: contents; }
   .hero__copy > .eyebrow      { order: 1; }
   .hero__copy > .display      { order: 2; }
-  .hero__copy > .hero__sub    { order: 3; }
-  .hero__art                  { order: 4; }
+  .hero__art                  { order: 3; }
+  .hero__copy > .hero__sub    { order: 4; }
   .hero__copy > .cta-row      { order: 5; }
   .hero__copy > .hero__stamps { order: 6; }
   .hero__art-frame {
